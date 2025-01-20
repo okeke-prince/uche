@@ -12,37 +12,8 @@ function Page() {
   
 
   async function handleSubmit(formData) {
-    "use server"
-  
-    const contact = {
-      name: formData.get('username'),
-      email: formData.get('email'),
-      subject: formData.get('subject'),
-      message: formData.get('message'),
-    }
-  
-    console.log(formData)
-    console.log(contact.email)
-  
-    try {
-      await db.prepare(
-        `INSERT INTO contact_submissions (
-          name,
-          email,
-          subject,
-          message
-        ) VALUES (?, ?, ?, ?)`
-      ).run(
-        contact.name,
-        contact.email,
-        contact.subject,
-        contact.message
-      )
-  
-      console.log("Data successfully inserted into the database!");
-    } catch (error) {
-      console.error("Error inserting data into the database:", error);
-    }
+   
+    console.log("Data successfully inserted into the database!");
   }
   
   
@@ -50,7 +21,7 @@ function Page() {
 
   return (
     <div className="grid grid-cols-1 mx-9 my-10 justify-items-center">
-      <form action={handleSubmit}>
+      <form>
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
             <h1 className="text-base/7 font-semibold text-gray-900">
@@ -67,7 +38,6 @@ function Page() {
                     <input
                       id="username"
                       name="username"
-                      defaultValue={"ddas"}
                       type="text"
                       placeholder="Jane Smith"
                       className="block min-w-0 grow py-1.5 border-none pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
@@ -86,7 +56,6 @@ function Page() {
                     <input
                       id="email"
                       name="email"
-                      defaultValue={"ddas@gmail.com"}
 
                       type="email"
                       placeholder="email@example.com"
@@ -106,7 +75,6 @@ function Page() {
                     <input
                       id="subject"
                       name="subject"
-                      defaultValue={"ddas"}
 
                       type="text"
                       placeholder="Subject"
@@ -125,7 +93,6 @@ function Page() {
                   <textarea
                     id="message"
                     name="message"
-                    defaultValue={"ddas"}
 
                     rows={4}
                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
